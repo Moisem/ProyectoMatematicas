@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/MetodoEuler/precache-manifest.a7d161ae7d0656539e46dafd3e6297ff.js"
+  "/MetodoEuler/precache-manifest.23e71b944faeb65bfc618e475ec7c07d.js"
 );
 
 self.addEventListener('message', (event) => {

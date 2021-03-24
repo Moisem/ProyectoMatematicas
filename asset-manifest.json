@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/MetodoEuler/static/css/main.0ac1ac59.chunk.css",
-    "main.js": "/MetodoEuler/static/js/main.12af9a7b.chunk.js",
-    "main.js.map": "/MetodoEuler/static/js/main.12af9a7b.chunk.js.map",
+    "main.js": "/MetodoEuler/static/js/main.4440fe0c.chunk.js",
+    "main.js.map": "/MetodoEuler/static/js/main.4440fe0c.chunk.js.map",
     "runtime-main.js": "/MetodoEuler/static/js/runtime-main.65ead486.js",
     "runtime-main.js.map": "/MetodoEuler/static/js/runtime-main.65ead486.js.map",
     "static/css/2.d0176e96.chunk.css": "/MetodoEuler/static/css/2.d0176e96.chunk.css",
-    "static/js/2.0257242e.chunk.js": "/MetodoEuler/static/js/2.0257242e.chunk.js",
-    "static/js/2.0257242e.chunk.js.map": "/MetodoEuler/static/js/2.0257242e.chunk.js.map",
+    "static/js/2.93c18715.chunk.js": "/MetodoEuler/static/js/2.93c18715.chunk.js",
+    "static/js/2.93c18715.chunk.js.map": "/MetodoEuler/static/js/2.93c18715.chunk.js.map",
     "index.html": "/MetodoEuler/index.html",
-    "precache-manifest.a7d161ae7d0656539e46dafd3e6297ff.js": "/MetodoEuler/precache-manifest.a7d161ae7d0656539e46dafd3e6297ff.js",
+    "precache-manifest.23e71b944faeb65bfc618e475ec7c07d.js": "/MetodoEuler/precache-manifest.23e71b944faeb65bfc618e475ec7c07d.js",
     "service-worker.js": "/MetodoEuler/service-worker.js",
     "static/css/2.d0176e96.chunk.css.map": "/MetodoEuler/static/css/2.d0176e96.chunk.css.map",
     "static/css/main.0ac1ac59.chunk.css.map": "/MetodoEuler/static/css/main.0ac1ac59.chunk.css.map",
-    "static/js/2.0257242e.chunk.js.LICENSE.txt": "/MetodoEuler/static/js/2.0257242e.chunk.js.LICENSE.txt",
-    "static/js/main.12af9a7b.chunk.js.LICENSE.txt": "/MetodoEuler/static/js/main.12af9a7b.chunk.js.LICENSE.txt",
+    "static/js/2.93c18715.chunk.js.LICENSE.txt": "/MetodoEuler/static/js/2.93c18715.chunk.js.LICENSE.txt",
+    "static/js/main.4440fe0c.chunk.js.LICENSE.txt": "/MetodoEuler/static/js/main.4440fe0c.chunk.js.LICENSE.txt",
     "static/media/marc.jpg": "/MetodoEuler/static/media/marc.8880a65c.jpg",
     "static/media/sidebar-1.jpg": "/MetodoEuler/static/media/sidebar-1.8e9f0a3c.jpg",
     "static/media/sidebar-2.jpg": "/MetodoEuler/static/media/sidebar-2.310509c9.jpg",
@@ -24,8 +24,8 @@
   "entrypoints": [
     "static/js/runtime-main.65ead486.js",
     "static/css/2.d0176e96.chunk.css",
-    "static/js/2.0257242e.chunk.js",
+    "static/js/2.93c18715.chunk.js",
     "static/css/main.0ac1ac59.chunk.css",
-    "static/js/main.12af9a7b.chunk.js"
+    "static/js/main.4440fe0c.chunk.js"
   ]
 }
