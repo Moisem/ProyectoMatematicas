@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
   },
-  "homepage":"https://alexanderNWO.github.io/MetodoEuler",
+  "homepage": "https://alexanderNWO.github.io/ProyectoMatematicas",
   "optionalDependencies": {
     "@types/googlemaps": "3.39.6",
     "@types/markerclustererplus": "2.1.33",
