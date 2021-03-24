@@ -74,7 +74,7 @@ export default function Dashboard() {
         eulerM: i + counter,
         k4: i / counter,
       };
-      labels.push(i);
+      labels.push(counter.toFixed(2));
       series[0].push(eulerInfo[i].euler);
       series[1].push(eulerInfo[i].eulerM);
       series[2].push(eulerInfo[i].k4);
@@ -132,7 +132,7 @@ export default function Dashboard() {
                     <Card plain>
                       <CardHeader plain color="primary">
                         <h4 className={classes.cardTitleWhite}>
-                          Intervalo de la estimación 0 a {h}
+                          Intervalo de la estimación 0 a {iterations}
                         </h4>
                         <p className={classes.cardCategoryWhite}>h = {h}</p>
                       </CardHeader>
@@ -172,16 +172,16 @@ export default function Dashboard() {
                                         {euler.iteration}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.h}
+                                        {euler.h.toFixed(2)}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.euler}
+                                        {euler.euler.toFixed(5)}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.eulerM}
+                                        {euler.eulerM.toFixed(5)}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.k4}
+                                        {euler.k4.toFixed(5)}
                                       </TableCell>
                                     </TableRow>
                                   ))
