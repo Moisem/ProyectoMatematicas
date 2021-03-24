@@ -6,7 +6,8 @@ var Chartist = require("chartist");
 // ##############################
 // // // variables used to create animation on charts
 // #############################
-var delays = 80,
+var seq = 0,
+  delays = 80,
   durations = 500;
 var delays2 = 80,
   durations2 = 500;
@@ -117,7 +118,7 @@ const dailySalesChart = {
       tension: 0,
     }),
     low: 0,
-    high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+    high: 25, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,
