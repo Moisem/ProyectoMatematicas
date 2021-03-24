@@ -1,20 +1,29 @@
 {
   "files": {
     "main.css": "/ProyectoMatematicas/static/css/main.0ac1ac59.chunk.css",
-    "main.js": "/ProyectoMatematicas/static/js/main.4440fe0c.chunk.js",
-    "main.js.map": "/ProyectoMatematicas/static/js/main.4440fe0c.chunk.js.map",
-    "runtime-main.js": "/ProyectoMatematicas/static/js/runtime-main.e447cec0.js",
-    "runtime-main.js.map": "/ProyectoMatematicas/static/js/runtime-main.e447cec0.js.map",
+    "main.js": "/ProyectoMatematicas/static/js/main.6bd28938.chunk.js",
+    "main.js.map": "/ProyectoMatematicas/static/js/main.6bd28938.chunk.js.map",
+    "runtime-main.js": "/ProyectoMatematicas/static/js/runtime-main.1dd58e0a.js",
+    "runtime-main.js.map": "/ProyectoMatematicas/static/js/runtime-main.1dd58e0a.js.map",
     "static/css/2.d0176e96.chunk.css": "/ProyectoMatematicas/static/css/2.d0176e96.chunk.css",
-    "static/js/2.93c18715.chunk.js": "/ProyectoMatematicas/static/js/2.93c18715.chunk.js",
-    "static/js/2.93c18715.chunk.js.map": "/ProyectoMatematicas/static/js/2.93c18715.chunk.js.map",
+    "static/js/2.c0191d29.chunk.js": "/ProyectoMatematicas/static/js/2.c0191d29.chunk.js",
+    "static/js/2.c0191d29.chunk.js.map": "/ProyectoMatematicas/static/js/2.c0191d29.chunk.js.map",
+    "static/js/3.c6bcf7d3.chunk.js": "/ProyectoMatematicas/static/js/3.c6bcf7d3.chunk.js",
+    "static/js/3.c6bcf7d3.chunk.js.map": "/ProyectoMatematicas/static/js/3.c6bcf7d3.chunk.js.map",
+    "static/js/4.1ef31bb9.chunk.js": "/ProyectoMatematicas/static/js/4.1ef31bb9.chunk.js",
+    "static/js/4.1ef31bb9.chunk.js.map": "/ProyectoMatematicas/static/js/4.1ef31bb9.chunk.js.map",
+    "static/js/5.be8eac35.chunk.js": "/ProyectoMatematicas/static/js/5.be8eac35.chunk.js",
+    "static/js/5.be8eac35.chunk.js.map": "/ProyectoMatematicas/static/js/5.be8eac35.chunk.js.map",
     "index.html": "/ProyectoMatematicas/index.html",
-    "precache-manifest.7a0e897886ac0a69555a7a2718673c17.js": "/ProyectoMatematicas/precache-manifest.7a0e897886ac0a69555a7a2718673c17.js",
+    "precache-manifest.dac190d2c06c66a37b1c35a83ae6a7f5.js": "/ProyectoMatematicas/precache-manifest.dac190d2c06c66a37b1c35a83ae6a7f5.js",
     "service-worker.js": "/ProyectoMatematicas/service-worker.js",
     "static/css/2.d0176e96.chunk.css.map": "/ProyectoMatematicas/static/css/2.d0176e96.chunk.css.map",
     "static/css/main.0ac1ac59.chunk.css.map": "/ProyectoMatematicas/static/css/main.0ac1ac59.chunk.css.map",
-    "static/js/2.93c18715.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/2.93c18715.chunk.js.LICENSE.txt",
-    "static/js/main.4440fe0c.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/main.4440fe0c.chunk.js.LICENSE.txt",
+    "static/js/2.c0191d29.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/2.c0191d29.chunk.js.LICENSE.txt",
+    "static/js/3.c6bcf7d3.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/3.c6bcf7d3.chunk.js.LICENSE.txt",
+    "static/js/4.1ef31bb9.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/4.1ef31bb9.chunk.js.LICENSE.txt",
+    "static/js/5.be8eac35.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/5.be8eac35.chunk.js.LICENSE.txt",
+    "static/js/main.6bd28938.chunk.js.LICENSE.txt": "/ProyectoMatematicas/static/js/main.6bd28938.chunk.js.LICENSE.txt",
     "static/media/marc.jpg": "/ProyectoMatematicas/static/media/marc.8880a65c.jpg",
     "static/media/sidebar-1.jpg": "/ProyectoMatematicas/static/media/sidebar-1.8e9f0a3c.jpg",
     "static/media/sidebar-2.jpg": "/ProyectoMatematicas/static/media/sidebar-2.310509c9.jpg",
@@ -22,10 +31,10 @@
     "static/media/sidebar-4.jpg": "/ProyectoMatematicas/static/media/sidebar-4.fc9cb053.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e447cec0.js",
+    "static/js/runtime-main.1dd58e0a.js",
     "static/css/2.d0176e96.chunk.css",
-    "static/js/2.93c18715.chunk.js",
+    "static/js/2.c0191d29.chunk.js",
     "static/css/main.0ac1ac59.chunk.css",
-    "static/js/main.4440fe0c.chunk.js"
+    "static/js/main.6bd28938.chunk.js"
   ]
 }
