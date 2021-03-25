@@ -43,8 +43,10 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [euler, setEuler] = useState([]);
-  const [iterations, setIterations] = useState(0);
-  const [h, setH] = useState(0);
+  const [xinit, setXInit] = useState(0);
+  const [xfin, setXFin] = useState(0);
+  const [yinit, setYInit] = useState(0);
+  const [h, setH] = useState(0.1);
   const [dataChart, setDataChart] = useState([]);
   const [reloadInfo, setReloadInfo] = useState(false);
   var data = {
@@ -53,8 +55,16 @@ export default function Dashboard() {
   };
   const { labels, series } = data;
 
-  const getInformationIteration = (e) => {
-    setIterations(e.target.value);
+  const getInformationXInit = (e) => {
+    setXInit(e.target.value);
+  };
+
+  const getInformationXFin = (e) => {
+    setXFin(e.target.value);
+  };
+
+  const getInformationYInit = (e) => {
+    setYInit(e.target.value);
   };
 
   const getInformationH = (e) => {
@@ -63,21 +73,31 @@ export default function Dashboard() {
 
   const getinfos = () => {
     var i = 0;
+    var j = Number(xinit);
     var eulerInfo = [];
     var counter = 0;
-    for (i = 0; i <= iterations; i++) {
-      counter += Number(h);
+    var iterations = 0;
+    var newY = Number(yinit);
+    for (j = Number(xinit); j <= Number(xfin); j += Number(h)) {
+      iterations++;
+    }
+    console.log(iterations);
+    while (i <= iterations) {
       eulerInfo[i] = {
-        iteration: i,
-        h: counter,
-        euler: i * counter,
-        eulerM: i + counter,
-        k4: i / counter,
+        iteration: i + 1,
+        x: Number(counter),
+        y: Number(newY),
+        euler: Number(counter) - Number(newY) + Number(2),
+        eulerM: Number(counter) - Number(newY) + Number(2),
+        k4: Number(counter) - Number(newY) + Number(2),
       };
       labels.push(counter.toFixed(2));
       series[0].push(eulerInfo[i].euler);
-      series[1].push(eulerInfo[i].eulerM);
+      series[1].push(Number(eulerInfo[i].eulerM));
       series[2].push(eulerInfo[i].k4);
+      newY = Number(newY) + Number(h) * Number(eulerInfo[i].euler);
+      counter += Number(h);
+      i++;
     }
 
     setEuler(eulerInfo);
@@ -87,7 +107,7 @@ export default function Dashboard() {
   useEffect(() => {
     getinfos();
     setReloadInfo(false);
-  }, [iterations, h]);
+  }, [xinit, xfin, yinit]);
 
   console.log(euler);
   return (
@@ -95,12 +115,38 @@ export default function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <TextField
-            label="Numero De Iteraciones"
-            name="iterations"
+            label="Valor Inicial X"
+            name="xinit"
             id="standard-basic"
             type="numeric"
             defaultValue="0"
-            onChange={(e) => getInformationIteration(e)}
+            onChange={(e) => getInformationXInit(e)}
+            formControlProps={{
+              fullWidth: true,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <TextField
+            label="Valor Final X"
+            name="xfin"
+            id="standard-basic"
+            type="numeric"
+            defaultValue="0"
+            onChange={(e) => getInformationXFin(e)}
+            formControlProps={{
+              fullWidth: true,
+            }}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <TextField
+            label="Valor Inicial Y"
+            name="yinit"
+            id="standard-basic"
+            type="numeric"
+            defaultValue="0"
+            onChange={(e) => getInformationYInit(e)}
             formControlProps={{
               fullWidth: true,
             }}
@@ -110,7 +156,7 @@ export default function Dashboard() {
           <TextField
             label="Valor De H"
             name="h"
-            defaultValue="0"
+            defaultValue="0.10"
             id="standard-basic"
             onChange={(e) => getInformationH(e)}
             type="numeric"
@@ -121,7 +167,7 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
-            title="Ecuación:"
+            title="Ecuación: dy/dx = x-y+2"
             headerColor="primary"
             tabs={[
               {
@@ -132,7 +178,7 @@ export default function Dashboard() {
                     <Card plain>
                       <CardHeader plain color="primary">
                         <h4 className={classes.cardTitleWhite}>
-                          Intervalo de la estimación 0 a {iterations}
+                          Intervalo de la estimación {xinit} a {xfin}
                         </h4>
                         <p className={classes.cardCategoryWhite}>h = {h}</p>
                       </CardHeader>
@@ -149,6 +195,7 @@ export default function Dashboard() {
                                     Iteración
                                   </TableCell>
                                   <TableCell align="center">X</TableCell>
+                                  <TableCell align="center">Y</TableCell>
                                   <TableCell align="center">Euler</TableCell>
                                   <TableCell align="center">
                                     Euler Mejorado
@@ -172,16 +219,19 @@ export default function Dashboard() {
                                         {euler.iteration}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.h.toFixed(2)}
+                                        {euler.x}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.euler.toFixed(5)}
+                                        {euler.y}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.eulerM.toFixed(5)}
+                                        {euler.euler}
                                       </TableCell>
                                       <TableCell align="center">
-                                        {euler.k4.toFixed(5)}
+                                        {euler.eulerM}
+                                      </TableCell>
+                                      <TableCell align="center">
+                                        {euler.k4}
                                       </TableCell>
                                     </TableRow>
                                   ))
