@@ -39,7 +39,7 @@ import RTLPage from "views/RTLPage/RTLPage.js";
 const dashboardRoutes = [
   {
     path: "/dashboard",
-    name: "Soluciones",
+    name: "Ecuacion: -20y + 7e(0.5-x)",
     icon: Dashboard,
     component: DashboardPage,
     layout: "/admin"
