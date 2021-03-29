@@ -118,13 +118,21 @@ export default function Dashboard() {
     //console.log(iterations);
     while (i <= iterations) {
       //Inician calculos de Runge Kutta
-      k1 = Number(h) * Math.exp(-newYKutta);
-      y2 = Number(newYKutta) + (1 / 2) * k1;
-      k2 = Number(h) * Math.exp(-y2);
-      y3 = Number(newYKutta) + (1 / 2) * k2;
-      k3 = Number(h) * Math.exp(-y3);
-      y4 = Number(newYKutta) + k3;
-      k4 = Number(h) * Math.exp(-y4);
+      eulerInfo[i] = {
+        iteration: i + 1,
+        x: Number(counter),
+        euler: newY,
+        eulerM: Yn,
+        k4: newYKutta,
+      };
+
+      k1 = Math.exp(-newYKutta);
+      y2 = Number(newYKutta) + (k1 * h) / 2;
+      k2 = Math.exp(-y2);
+      y3 = Number(newYKutta) + (k2 * h) / 2;
+      k3 = Math.exp(-y3);
+      y4 = Number(newYKutta) + k3 * Number(h);
+      k4 = Math.exp(-y4);
 
       rungeKuttaInfo[i] = {
         iteration: i + 1,
@@ -134,14 +142,20 @@ export default function Dashboard() {
         k3: k3,
         k4: k4,
       };
+      console.log(k1);
 
-      newYKutta = Number(newYKutta) + (1 / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
+      newYKutta =
+        Number(newYKutta) + (Number(h) / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
       //Termina Runge Kutta
 
       //Inician Calculos de Euler Mejorado
       SubYn = Yn + Number(h) * Math.exp(-Number(Yn));
-      eulerM =
-        Yn + (h / 2) * (Math.exp(-Number(Yn)) + Math.exp(-Number(SubYn)));
+      //console.log(SubYn);
+      let exp = Math.exp(-Yn);
+      let subExp = Math.exp(-SubYn);
+      let newH = Number(h) / 2;
+
+      eulerM = Yn + newH * (exp + subExp);
       Yn = eulerM;
       //Terminan calculos de Euler Mejorado
 
@@ -150,13 +164,6 @@ export default function Dashboard() {
       newY = Number(newY) + Number(h) * Number(euler);
       //Termina Calculo de Euler
 
-      eulerInfo[i] = {
-        iteration: i + 1,
-        x: Number(counter),
-        euler: newY,
-        eulerM: Yn,
-        k4: k4,
-      };
       labels.push(counter.toFixed(2));
       series[0].data.push(eulerInfo[i].euler);
       series[1].data.push(Number(eulerInfo[i].eulerM));
@@ -208,7 +215,7 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
-            title="Ecuacion: -20y + 7e(0.5-x)"
+            title="Ecuacion: e^(-y)"
             headerColor="primary"
             tabs={[
               {
