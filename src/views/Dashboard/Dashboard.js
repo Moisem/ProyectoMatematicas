@@ -52,7 +52,11 @@ export default function Dashboard() {
   const [reloadInfo, setReloadInfo] = useState(false);
   var data = {
     labels: [],
-    series: [[], [], []],
+    series: [
+      { name: "Euler", data: [] },
+      { name: "Euler Mejorado", data: [] },
+      { name: "Runge Kutta 4", data: [] },
+    ],
   };
   const { labels, series } = data;
 
@@ -79,15 +83,17 @@ export default function Dashboard() {
     var rungeKuttaInfo = [];
     var counter = 0;
     var iterations = 0;
+    var euler = 0;
     var newY = Number(yinit);
     var newYKutta = Number(yinit);
+    var Yn = Number(yinit);
+    var SubYn = 0;
+    var eulerM = 0;
     var k1 = 0;
-    var x2 = 0;
     var y2 = 0;
     var k2 = 0;
     var y3 = 0;
     var k3 = 0;
-    var x4 = 0;
     var y4 = 0;
     var k4 = 0;
     if (
@@ -111,42 +117,50 @@ export default function Dashboard() {
     }
     //console.log(iterations);
     while (i <= iterations) {
-      k1 = -20 * Number(newYKutta) + 7 ** (-0.5 * Number(counter));
-      x2 = Number(counter) + Number(h) / 2;
-      y2 = Number(newYKutta) + (k1 * Number(h)) / 2;
-      k2 = -20 * y2 + 7 ** (-0.5 * x2);
-      y3 = Number(newYKutta) + (k2 * Number(h)) / 2;
-      k3 = -20 * y3 + 7 ** (-0.5 * x2);
-      x4 = Number(counter) + Number(h);
-      y4 = Number(newYKutta) + k3 * Number(h);
-      k4 = -20 * y4 + 7 ** (-0.5 * x2);
+      //Inician calculos de Runge Kutta
+      k1 = Number(h) * Math.exp(-newYKutta);
+      y2 = Number(newYKutta) + (1 / 2) * k1;
+      k2 = Number(h) * Math.exp(-y2);
+      y3 = Number(newYKutta) + (1 / 2) * k2;
+      k3 = Number(h) * Math.exp(-y3);
+      y4 = Number(newYKutta) + k3;
+      k4 = Number(h) * Math.exp(-y4);
 
       rungeKuttaInfo[i] = {
         iteration: i + 1,
         x: Number(counter),
-        y: Number(newYKutta),
         k1: k1,
         k2: k2,
         k3: k3,
         k4: k4,
       };
 
-      newYKutta =
-        Number(newYKutta) + (Number(h) / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
+      newYKutta = Number(newYKutta) + (1 / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
+      //Termina Runge Kutta
+
+      //Inician Calculos de Euler Mejorado
+      SubYn = Yn + Number(h) * Math.exp(-Number(Yn));
+      eulerM =
+        Yn + (h / 2) * (Math.exp(-Number(Yn)) + Math.exp(-Number(SubYn)));
+      Yn = eulerM;
+      //Terminan calculos de Euler Mejorado
+
+      //Inicia Calculo de Euler
+      euler = Math.exp(-Number(newY));
+      newY = Number(newY) + Number(h) * Number(euler);
+      //Termina Calculo de Euler
 
       eulerInfo[i] = {
         iteration: i + 1,
         x: Number(counter),
-        y: Number(newY),
-        euler: -20 * Number(newY) + 7 ** (-0.5 * Number(counter)),
-        eulerM: Number(counter) - Number(newY) + Number(2),
+        euler: newY,
+        eulerM: Yn,
         k4: k4,
       };
       labels.push(counter.toFixed(2));
-      series[0].push(eulerInfo[i].euler);
-      series[1].push(Number(eulerInfo[i].eulerM));
-      series[2].push(eulerInfo[i].k4);
-      newY = Number(newY) + Number(h) * Number(eulerInfo[i].euler);
+      series[0].data.push(eulerInfo[i].euler);
+      series[1].data.push(Number(eulerInfo[i].eulerM));
+      series[2].data.push(eulerInfo[i].k4);
 
       counter += Number(h);
       i++;
@@ -168,38 +182,12 @@ export default function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <TextField
-            label="Valor Inicial X"
-            name="xinit"
-            id="standard-basic"
-            type="numeric"
-            defaultValue="0"
-            onChange={(e) => getInformationXInit(e)}
-            formControlProps={{
-              fullWidth: true,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <TextField
             label="Valor Final X"
             name="xfin"
             id="standard-basic"
             type="numeric"
             defaultValue="0"
             onChange={(e) => getInformationXFin(e)}
-            formControlProps={{
-              fullWidth: true,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <TextField
-            label="Valor Inicial Y"
-            name="yinit"
-            id="standard-basic"
-            type="numeric"
-            defaultValue="0"
-            onChange={(e) => getInformationYInit(e)}
             formControlProps={{
               fullWidth: true,
             }}
@@ -248,7 +236,6 @@ export default function Dashboard() {
                                     Iteración
                                   </TableCell>
                                   <TableCell align="center">X</TableCell>
-                                  <TableCell align="center">Y</TableCell>
                                   <TableCell align="center">K1</TableCell>
                                   <TableCell align="center">K2</TableCell>
                                   <TableCell align="center">K3</TableCell>
@@ -272,9 +259,6 @@ export default function Dashboard() {
                                       </TableCell>
                                       <TableCell align="center">
                                         {rungeKutta.x}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {rungeKutta.y}
                                       </TableCell>
                                       <TableCell align="center">
                                         {rungeKutta.k1}
@@ -325,7 +309,6 @@ export default function Dashboard() {
                                     Iteración
                                   </TableCell>
                                   <TableCell align="center">X</TableCell>
-                                  <TableCell align="center">Y</TableCell>
                                   <TableCell align="center">Euler</TableCell>
                                   <TableCell align="center">
                                     Euler Mejorado
@@ -337,8 +320,7 @@ export default function Dashboard() {
                                 {!euler.length ? (
                                   <TableRow>
                                     <TableCell align="center" colSpan={6}>
-                                      No se encuentran Cuentas Bancarias
-                                      Registradas
+                                      No se encuentran resultados
                                     </TableCell>
                                   </TableRow>
                                 ) : (
@@ -350,9 +332,6 @@ export default function Dashboard() {
                                       </TableCell>
                                       <TableCell align="center">
                                         {euler.x}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {euler.y}
                                       </TableCell>
                                       <TableCell align="center">
                                         {euler.euler}
