@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ce7b22d4205e28fde9065b1b50483ec9",
+    "revision": "d594c45809f368ed35420c72d7773e46",
     "url": "/ProyectoMatematicas/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ProyectoMatematicas/static/css/2.d0176e96.chunk.css"
   },
   {
-    "revision": "6b898416b2989b922fcb",
+    "revision": "20efda1943dec205e59c",
     "url": "/ProyectoMatematicas/static/css/main.0ac1ac59.chunk.css"
   },
   {
@@ -44,12 +44,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ProyectoMatematicas/static/js/5.be8eac35.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6b898416b2989b922fcb",
-    "url": "/ProyectoMatematicas/static/js/main.16902162.chunk.js"
+    "revision": "20efda1943dec205e59c",
+    "url": "/ProyectoMatematicas/static/js/main.fbe5b537.chunk.js"
   },
   {
     "revision": "f7bdf0cfc9ea0dd44285692948c2d84f",
-    "url": "/ProyectoMatematicas/static/js/main.16902162.chunk.js.LICENSE.txt"
+    "url": "/ProyectoMatematicas/static/js/main.fbe5b537.chunk.js.LICENSE.txt"
   },
   {
     "revision": "9260f8b106b285e7a525",
