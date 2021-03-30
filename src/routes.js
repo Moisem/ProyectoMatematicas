@@ -39,7 +39,7 @@ import RTLPage from "views/RTLPage/RTLPage.js";
 const dashboardRoutes = [
   {
     path: "/dashboard",
-    name: "Ecuacion: e^(-y)",
+    name: "Ecuacion: y'=exp(-y)",
     icon: Dashboard,
     component: DashboardPage,
     layout: "/admin"

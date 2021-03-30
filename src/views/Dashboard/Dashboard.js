@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import CustomInput from "components/CustomInput/CustomInput.js";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
+import * as MyLegend from "chartist-plugin-legend";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import TextField from "@material-ui/core/TextField";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import StopIcon from "@material-ui/icons/Stop";
+import TocIcon from '@material-ui/icons/Toc';
 // @material-ui/icons
 import BarChartIcon from "@material-ui/icons/BarChart";
 import MaterialTable from "material-table";
@@ -59,6 +66,13 @@ export default function Dashboard() {
     ],
   };
   const { labels, series } = data;
+
+  const flexContainer = {
+    display: "flex",
+    flexDirection: "row",
+    padding: 0,
+    backgroundColor: "#AE71EB",
+  };
 
   const getInformationXInit = (e) => {
     setXInit(e.target.value);
@@ -215,12 +229,12 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
-            title="Ecuacion: e^(-y)"
+            title="Ecuacion: y'=exp(-y)"
             headerColor="primary"
             tabs={[
               {
                 tabName: "Tabla Runge Kutta",
-                tabIcon: TableChartIcon,
+                tabIcon: TocIcon,
                 tabContent: (
                   <GridItem xs={12} sm={12} md={12}>
                     <Card plain>
@@ -253,8 +267,7 @@ export default function Dashboard() {
                                 {!rungeKutta.length ? (
                                   <TableRow>
                                     <TableCell align="center" colSpan={6}>
-                                      No se encuentran Cuentas Bancarias
-                                      Registradas
+                                      No se encuentran resultados
                                     </TableCell>
                                   </TableRow>
                                 ) : (
@@ -292,7 +305,7 @@ export default function Dashboard() {
                 ),
               },
               {
-                tabName: "Tabla",
+                tabName: "Tabla De Iteraciones",
                 tabIcon: TableChartIcon,
                 tabContent: (
                   <GridItem xs={12} sm={12} md={12}>
@@ -377,6 +390,28 @@ export default function Dashboard() {
                             listener={dailySalesChart.animation}
                           />
                         </CardHeader>
+                        <CardBody className="cardCategory">
+                          <List style={flexContainer}>
+                            <ListItem>
+                              <ListItemIcon>
+                                <StopIcon style={{ color: "white" }} />
+                              </ListItemIcon>
+                              <ListItemText primary="Euler" />
+                            </ListItem>
+                            <ListItem primaryText="foo2" secondaryText="bar2">
+                              <ListItemIcon>
+                                <StopIcon style={{ color: "red" }} />
+                              </ListItemIcon>
+                              <ListItemText primary="Euler Mejorado" />
+                            </ListItem>
+                            <ListItem primaryText="foo2" secondaryText="bar2">
+                              <ListItemIcon>
+                                <StopIcon style={{ color: "yellow" }} />
+                              </ListItemIcon>
+                              <ListItemText primary="Runge Kutta 4°" />
+                            </ListItem>
+                          </List>
+                        </CardBody>
                       </Card>
                     </GridItem>
                   </>
