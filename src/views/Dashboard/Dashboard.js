@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import StopIcon from "@material-ui/icons/Stop";
-import TocIcon from '@material-ui/icons/Toc';
+import TocIcon from "@material-ui/icons/Toc";
 // @material-ui/icons
 import BarChartIcon from "@material-ui/icons/BarChart";
 import MaterialTable from "material-table";
@@ -48,22 +48,29 @@ import { EqualizerOutlined } from "@material-ui/icons";
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
+  var options = {
+    high: 100,
+    responsive: true,
+    maintainAspectRatio: false,
+
+    axisX: {
+      labelInterpolationFnc: function (value, index) {
+        return index % 1 === 0 ? value : null;
+      },
+    },
+  };
   const classes = useStyles();
   const [euler, setEuler] = useState([]);
   const [rungeKutta, setRungeKutta] = useState([]);
   const [xinit, setXInit] = useState(0);
   const [xfin, setXFin] = useState(0);
-  const [yinit, setYInit] = useState(0);
+  const [yinit, setYInit] = useState(2);
   const [h, setH] = useState(0.1);
   const [dataChart, setDataChart] = useState([]);
   const [reloadInfo, setReloadInfo] = useState(false);
   var data = {
     labels: [],
-    series: [
-      { name: "Euler", data: [] },
-      { name: "Euler Mejorado", data: [] },
-      { name: "Runge Kutta 4", data: [] },
-    ],
+    series: [{ name: "Euler", data: [] }],
   };
   const { labels, series } = data;
 
@@ -174,14 +181,12 @@ export default function Dashboard() {
       //Terminan calculos de Euler Mejorado
 
       //Inicia Calculo de Euler
-      euler = Math.exp(-Number(newY));
+      euler = 2 * Number(counter) * Number(newY);
       newY = Number(newY) + Number(h) * Number(euler);
       //Termina Calculo de Euler
 
       labels.push(counter.toFixed(2));
       series[0].data.push(eulerInfo[i].euler);
-      series[1].data.push(Number(eulerInfo[i].eulerM));
-      series[2].data.push(eulerInfo[i].k4);
 
       counter += Number(h);
       i++;
@@ -233,78 +238,6 @@ export default function Dashboard() {
             headerColor="primary"
             tabs={[
               {
-                tabName: "Tabla Runge Kutta",
-                tabIcon: TocIcon,
-                tabContent: (
-                  <GridItem xs={12} sm={12} md={12}>
-                    <Card plain>
-                      <CardHeader plain color="primary">
-                        <h4 className={classes.cardTitleWhite}>
-                          Intervalo de la estimación {xinit} a {xfin}
-                        </h4>
-                        <p className={classes.cardCategoryWhite}>h = {h}</p>
-                      </CardHeader>
-                      <CardBody>
-                        <>
-                          <TableContainer>
-                            <Table
-                              className={classes.table}
-                              aria-label="simple table"
-                            >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell align="center">
-                                    Iteración
-                                  </TableCell>
-                                  <TableCell align="center">X</TableCell>
-                                  <TableCell align="center">K1</TableCell>
-                                  <TableCell align="center">K2</TableCell>
-                                  <TableCell align="center">K3</TableCell>
-                                  <TableCell align="center">K4</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {!rungeKutta.length ? (
-                                  <TableRow>
-                                    <TableCell align="center" colSpan={6}>
-                                      No se encuentran resultados
-                                    </TableCell>
-                                  </TableRow>
-                                ) : (
-                                  rungeKutta.map((rungeKutta) => (
-                                    // eslint-disable-next-line react/jsx-key
-                                    <TableRow>
-                                      <TableCell align="center">
-                                        {rungeKutta.iteration}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {rungeKutta.x}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {rungeKutta.k1}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {rungeKutta.k2}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {rungeKutta.k3}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {rungeKutta.k4}
-                                      </TableCell>
-                                    </TableRow>
-                                  ))
-                                )}
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </>
-                      </CardBody>
-                    </Card>
-                  </GridItem>
-                ),
-              },
-              {
                 tabName: "Tabla De Iteraciones",
                 tabIcon: TableChartIcon,
                 tabContent: (
@@ -330,10 +263,6 @@ export default function Dashboard() {
                                   </TableCell>
                                   <TableCell align="center">X</TableCell>
                                   <TableCell align="center">Euler</TableCell>
-                                  <TableCell align="center">
-                                    Euler Mejorado
-                                  </TableCell>
-                                  <TableCell align="center">RK4</TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>
@@ -356,12 +285,6 @@ export default function Dashboard() {
                                       <TableCell align="center">
                                         {euler.euler}
                                       </TableCell>
-                                      <TableCell align="center">
-                                        {euler.eulerM}
-                                      </TableCell>
-                                      <TableCell align="center">
-                                        {euler.k4}
-                                      </TableCell>
                                     </TableRow>
                                   ))
                                 )}
@@ -383,10 +306,13 @@ export default function Dashboard() {
                       <Card chart>
                         <CardHeader color="primary">
                           <ChartistGraph
+                            style={{
+                              height: "600px",
+                            }}
                             className="ct-chart"
                             data={dataChart}
                             type="Line"
-                            options={dailySalesChart.options}
+                            options={options}
                             listener={dailySalesChart.animation}
                           />
                         </CardHeader>
@@ -397,18 +323,6 @@ export default function Dashboard() {
                                 <StopIcon style={{ color: "white" }} />
                               </ListItemIcon>
                               <ListItemText primary="Euler" />
-                            </ListItem>
-                            <ListItem primaryText="foo2" secondaryText="bar2">
-                              <ListItemIcon>
-                                <StopIcon style={{ color: "red" }} />
-                              </ListItemIcon>
-                              <ListItemText primary="Euler Mejorado" />
-                            </ListItem>
-                            <ListItem primaryText="foo2" secondaryText="bar2">
-                              <ListItemIcon>
-                                <StopIcon style={{ color: "yellow" }} />
-                              </ListItemIcon>
-                              <ListItemText primary="Runge Kutta 4°" />
                             </ListItem>
                           </List>
                         </CardBody>

@@ -97,7 +97,6 @@ export default function RTL({ ...rest }) {
       <Sidebar
         routes={routes}
         logoText={"الإبداعية تيم"}
-        logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}

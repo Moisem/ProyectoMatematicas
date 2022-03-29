@@ -83,8 +83,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"Alejandro Armenta Pavón"}
-        logo={logo}
+        logoText={"Lopez Gil Moises, Duarte Clemente Eduardo"}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
