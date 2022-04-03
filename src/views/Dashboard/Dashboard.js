@@ -48,32 +48,33 @@ import { EqualizerOutlined } from "@material-ui/icons";
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
+  //Aqui hacemos la confiracion de la grafica 
   var options = {
-    high: 100,
+    high: 10, //Definimos hasta donde llegara y
     responsive: true,
     maintainAspectRatio: false,
 
     axisX: {
       labelInterpolationFnc: function (value, index) {
-        return index % 1 === 0 ? value : null;
+        return index % 0 === 0 ? value : null;
       },
     },
   };
   const classes = useStyles();
-  const [euler, setEuler] = useState([]);
-  const [rungeKutta, setRungeKutta] = useState([]);
-  const [xinit, setXInit] = useState(0);
-  const [xfin, setXFin] = useState(0);
-  const [yinit, setYInit] = useState(2);
-  const [h, setH] = useState(0.1);
-  const [dataChart, setDataChart] = useState([]);
-  const [reloadInfo, setReloadInfo] = useState(false);
+  const [euler, setEuler] = useState([]); //Inicilizamos la ecuacion de euler como un objeto 
+  const [xinit, setXInit] = useState(0); //Inicilizamos x en 0 dependiendo la funcion
+  const [xfin, setXFin] = useState(0); //Inicilizamos hasta donde llegara x en 0 pero se puede cambiar desde el input
+  const [yinit, setYInit] = useState(2); //Inicilizamos y en 2 dependiendo la funcion 
+  const [h, setH] = useState(0.1); //Inicilizamos h en 0.1 pero se puede cambiar desde el input
+  const [dataChart, setDataChart] = useState([]); //Inicializamos una data para posteriormente graficar 
+  const [reloadInfo, setReloadInfo] = useState(false); 
   var data = {
     labels: [],
-    series: [{ name: "Euler", data: [] }],
+    series: [{ name: "Euler", data: [] }], //Se guarda la data para posteriormente graficar 
   };
   const { labels, series } = data;
 
+  //Estilos
   const flexContainer = {
     display: "flex",
     flexDirection: "row",
@@ -96,27 +97,18 @@ export default function Dashboard() {
   const getInformationH = (e) => {
     setH(e.target.value);
   };
-
+ 
+  //Comenzamos con la declarion de nuestras variables para su uso posterior 
   const getinfos = () => {
-    var i = 0;
-    var j = Number(xinit);
-    var eulerInfo = [];
-    var rungeKuttaInfo = [];
-    var counter = 0;
-    var iterations = 0;
-    var euler = 0;
-    var newY = Number(yinit);
-    var newYKutta = Number(yinit);
-    var Yn = Number(yinit);
-    var SubYn = 0;
-    var eulerM = 0;
-    var k1 = 0;
-    var y2 = 0;
-    var k2 = 0;
-    var y3 = 0;
-    var k3 = 0;
-    var y4 = 0;
-    var k4 = 0;
+    var i = 0; //Iteracciones desde 0
+    var j = Number(xinit); // X final 
+    var eulerInfo = []; //Data de euler para graficar 
+    var counter = 0; // X de puntos a graficar en euler
+    var iterations = 0; // Iteracciones + 1
+    var euler = 0; // Iniciamos euler en 0 para su uso posterior 
+    var newY = Number(yinit); //Y inicial 
+
+    //Definimos algunos valores de h solo para validar y no consumir muchos recursos 
     if (
       h == "0." ||
       h == "0.0" ||
@@ -133,58 +125,28 @@ export default function Dashboard() {
     ) {
       return;
     }
+    //Creamos la funcion de for para realizar las iteracciones hasta llegar a X final
     for (j = Number(xinit); j <= Number(xfin); j += Number(h)) {
       iterations++;
     }
     //console.log(iterations);
+    //Comienza el ciclo while para realizar euler dependiendo las iteracciones
     while (i <= iterations) {
-      //Inician calculos de Runge Kutta
       eulerInfo[i] = {
         iteration: i + 1,
         x: Number(counter),
         euler: newY,
-        eulerM: Yn,
-        k4: newYKutta,
       };
 
-      k1 = Math.exp(-newYKutta);
-      y2 = Number(newYKutta) + (k1 * h) / 2;
-      k2 = Math.exp(-y2);
-      y3 = Number(newYKutta) + (k2 * h) / 2;
-      k3 = Math.exp(-y3);
-      y4 = Number(newYKutta) + k3 * Number(h);
-      k4 = Math.exp(-y4);
 
-      rungeKuttaInfo[i] = {
-        iteration: i + 1,
-        x: Number(counter),
-        k1: k1,
-        k2: k2,
-        k3: k3,
-        k4: k4,
-      };
-      console.log(k1);
-
-      newYKutta =
-        Number(newYKutta) + (Number(h) / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
-      //Termina Runge Kutta
-
-      //Inician Calculos de Euler Mejorado
-      SubYn = Yn + Number(h) * Math.exp(-Number(Yn));
-      //console.log(SubYn);
-      let exp = Math.exp(-Yn);
-      let subExp = Math.exp(-SubYn);
-      let newH = Number(h) / 2;
-
-      eulerM = Yn + newH * (exp + subExp);
-      Yn = eulerM;
-      //Terminan calculos de Euler Mejorado
 
       //Inicia Calculo de Euler
-      euler = 2 * Number(counter) * Number(newY);
+      //2xy funcion principal
+      euler = 2 * Number(counter) * Number(newY); // Aqui solo se puede cambiar la funcion Teniendo en cuenta que counter es 'x' y newY es 'y'
       newY = Number(newY) + Number(h) * Number(euler);
       //Termina Calculo de Euler
 
+      //Guardamos la data de euler para graficar 
       labels.push(counter.toFixed(2));
       series[0].data.push(eulerInfo[i].euler);
 
@@ -193,7 +155,6 @@ export default function Dashboard() {
     }
 
     setEuler(eulerInfo);
-    setRungeKutta(rungeKuttaInfo);
     setDataChart(data);
   };
 
@@ -202,8 +163,10 @@ export default function Dashboard() {
     setReloadInfo(false);
   }, [xinit, xfin, yinit, h]);
 
+
   console.log(euler);
   return (
+    //Comienza la vista de la grafica y sus apartados 
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -234,7 +197,7 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
-            title="Ecuacion: y'=exp(-y)"
+            title="Ecuacion: 2xy"
             headerColor="primary"
             tabs={[
               {
@@ -330,19 +293,6 @@ export default function Dashboard() {
                     </GridItem>
                   </>
                 ),
-              },
-              {
-                /*
-                tabName: "Solucion Análitica",
-                tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
-                )
-              */
               },
             ]}
           />
